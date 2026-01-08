@@ -1,0 +1,5 @@
+mutation CreateQuizResult($quizId: String!, $quizTitle: String!, $score: Int!, $resultText: String!) {
+  createQuizResult(quizId: $quizId, quizTitle: $quizTitle, score: $score, resultText: $resultText) {
+    id
+  }
+}

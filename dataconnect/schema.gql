@@ -1,0 +1,20 @@
+type MoodEntry @model {
+  owner: String!
+  mood: Int!
+  date: DateTime!
+}
+
+type QuizResult @model {
+  owner: String!
+  quizId: String!
+  quizTitle: String!
+  score: Int!
+  resultText: String!
+  completedAt: DateTime!
+}
+
+type BreathingSession @model {
+  owner: String!
+  duration: Int! # in minutes
+  completedAt: DateTime!
+}

@@ -1,0 +1,17 @@
+{
+  "projects": {
+    "default": "mindease-e585b"
+  },
+  "targets": {
+    "mindease-e585b": {
+      "hosting": {
+        "mindease-e585b": [
+          "mindease-e585b"
+        ],
+        "sparv-nirvana": [
+          "sparv-nirvana"
+        ]
+      }
+    }
+  }
+}

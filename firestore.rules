@@ -1,0 +1,28 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Users can only read and write their own document
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Users can read and write their own mood entries in a subcollection
+    match /users/{userId}/moodEntries/{entryId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Rules for the appointments collection
+    match /appointments/{appointmentId} {
+      // Allow read (get, list) and delete if the user's email matches the document's email.
+      // This works for `list` because the client query filters by `userEmail`.
+      allow read, delete: if request.auth != null && resource.data.userEmail == request.auth.token.email;
+      
+      // Allow create if the user's email matches the email in the new document.
+      allow create: if request.auth != null && request.resource.data.userEmail == request.auth.token.email;
+
+      // Allow update if the user's email matches the existing document's email.
+      allow update: if request.auth != null && resource.data.userEmail == request.auth.token.email;
+    }
+  }
+}

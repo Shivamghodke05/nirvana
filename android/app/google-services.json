@@ -1,0 +1,39 @@
+{
+    "project_info": {
+      "project_number": "1081449945852",
+      "project_id": "mindease-e585b",
+      "storage_bucket": "mindease-e585b.firebasestorage.app"
+    },
+    "client": [
+      {
+        "client_info": {
+          "mobilesdk_app_id": "1:1081449945852:android:21bed56493494c1a2e1579",
+          "android_client_info": {
+            "package_name": "com.example.app"
+          }
+        },
+        "oauth_client": [
+          {
+            "client_id": "1081449945852-a80lbjru7a8sk4chroi85bljdtcpqv40.apps.googleusercontent.com",
+            "client_type": 3
+          }
+        ],
+        "api_key": [
+          {
+            "current_key": "AIzaSyDOp0WiC1-MxABWizQ2FUakPlHbYStkHPE"
+          }
+        ],
+        "services": {
+          "appinvite_service": {
+            "other_platform_oauth_client": [
+              {
+                "client_id": "1081449945852-a80lbjru7a8sk4chroi85bljdtcpqv40.apps.googleusercontent.com",
+                "client_type": 3
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "configuration_version": "1"
+  }

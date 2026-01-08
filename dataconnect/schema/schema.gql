@@ -1,0 +1,71 @@
+# Represents a user, keyed by Firebase Auth UID.
+type User @table {
+  id: String! @default(expr: "auth.uid")
+  email: String! @unique
+  name: String
+  userType: String # e.g., 'student', 'professional'
+  institution: String
+}
+
+# Represents a user's mood entry.
+type MoodEntry @table {
+  id: UUID! @default(expr: "uuidV4()")
+  user: User!
+  rating: Int! # A rating from 1 to 5
+  notes: String
+  createdAt: Timestamp! @default(expr: "request.time")
+}
+
+# Stores aggregated stats for a user.
+type UserStats @table {
+  user: User! @unique
+  streak: Int @default(value: 0)
+  completedSessions: Int @default(value: 0)
+  totalMinutes: Int @default(value: 0)
+  weeklyMoodAverage: Float @default(value: 0)
+}
+
+# Represents a user activity, like a completed exercise.
+type Activity @table {
+  id: UUID! @default(expr: "uuidV4()")
+  user: User!
+  type: String! # 'mood', 'breathing', 'meditation', 'chatbot'
+  description: String!
+  duration: Int # in minutes, for exercises
+  createdAt: Timestamp! @default(expr: "request.time")
+}
+
+# Represents an unlockable achievement.
+type Achievement @table {
+  id: UUID! @default(expr: "uuidV4()")
+  title: String! @unique
+  description: String!
+  icon: String! # Name of the Lucide icon
+}
+
+# Join table for user's unlocked achievements.
+type UserAchievement @table(key: ["user", "achievement"]) {
+  user: User!
+  achievement: Achievement!
+  unlockedAt: Timestamp! @default(expr: "request.time")
+}
+
+# Represents a quiz result for a user.
+type QuizResult @table {
+  id: UUID! @default(expr: "uuidV4()")
+  user: User!
+  quizId: String!
+  quizTitle: String!
+  score: Int!
+  resultText: String!
+  createdAt: Timestamp! @default(expr: "request.time")
+}
+
+extend type Mutation {
+  createQuizResult(
+    quizId: String!,
+    quizTitle: String!,
+    score: Int!,
+    resultText: String!
+  ): QuizResult
+}
